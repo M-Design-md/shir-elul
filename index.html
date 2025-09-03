@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Player</title>
+  <link rel="icon" type="image/x-icon" href="rtmusic.ico">
   <style>
     body {
       margin: 0;
@@ -23,8 +24,8 @@
     /* Album image */
     .album {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 450px;
+      height: 450px;
     }
 
     .album img {
@@ -87,12 +88,17 @@
     }
 
     .btn {
-      padding: 12px 20px;
-      background: #ff4081;
+      width: 300px;
+      height: 70px;
+      margin: 50px;
+      text-align: center;
+      padding: 20px 20px;
+      background:url('שיר אלול (2).png') ;
       border: none;
-      border-radius: 30px;
+      border-radius: 15px;
       color: white;
       font-weight: bold;
+      font-size: 30px;
       cursor: pointer;
       transition: 0.3s;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -100,7 +106,7 @@
     }
 
     .btn:hover {
-      background: #e73370;
+      background: #bf8491;
       transform: translateY(-3px);
     }
 
@@ -122,8 +128,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: url('background.jpg') center/cover no-repeat;
-      opacity: 0.5;
+      background: url('שיר אלול (1).png') center/cover no-repeat;
+      opacity: 0.3;
       z-index: 0;
     }
 
@@ -154,18 +160,18 @@
         <canvas id="visualizer"></canvas>
       </div>
       <audio id="audio" controls>
-        <source src="./שיר אלול (1).mp3" type="audio/mpeg">
+        <source src="שיר אלול (1).mp3" type="audio/mpeg">
         הדפדפן שלך לא תומך בנגן האודיו.
       </audio>
       <div class="buttons">
-        <a href="./שיר אלול (1).mp3" download class="btn">⬇️ הורד שיר</a>
-        <a href="#lyrics" class="btn">📜 מילים</a>
+        <a href="שיר אלול (1).mp3" download class="btn"> ⬇ הורד שיר</a>
+        <a href="#lyrics" class="btn"> מילים</a>
       </div>
     </div>
 
     <!-- Right: Album Cover -->
     <div class="album">
-      <img src="./שיר אלול (2).png" alt="Album Cover">
+      <img src="שיר אלול (2).png" alt="Album Cover">
       <img src="9c3e2c3d-5524-47e1-aef5-28bc0136ea93.png" class="behind" alt="Behind Cover">
     </div>
   </div>
