@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #111, #333);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+    }
+
+    /* Album image */
+    .album {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .album img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+      animation: floatUp 1.5s ease forwards;
+    }
+
+    .album img.behind {
+      transform: translateX(20px) translateY(20px);
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    @keyframes floatUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Left side player */
+    .player {
+      flex: 1;
+      margin-right: 50px;
+    }
+
+    /* Sound visualizer */
+    #visualizer-container {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 20px;
+      display: none; /* מוסתר עד שהשיר מתנגן */
+    }
+
+    canvas#visualizer {
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      display: block;
+    }
+
+    audio {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      background: #ff4081;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #e73370;
+      transform: translateY(-3px);
+    }
+
+    /* Lyrics */
+    .lyrics {
+      margin-top: 100px;
+      padding: 50px;
+      background: rgba(255,255,255,0.05);
+      border-top: 2px solid rgba(255,255,255,0.2);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lyrics::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('background.jpg') center/cover no-repeat;
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    .lyrics h2, .lyrics p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lyrics h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: #ff4081;
+    }
+
+    .lyrics p {
+      line-height: 1.8;
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left: Player -->
+    <div class="player">
+      <div id="visualizer-container">
+        <canvas id="visualizer"></canvas>
+      </div>
+      <audio id="audio" controls>
+        <source src="./שיר אלול (1).mp3" type="audio/mpeg">
+        הדפדפן שלך לא תומך בנגן האודיו.
+      </audio>
+      <div class="buttons">
+        <a href="./שיר אלול (1).mp3" download class="btn">⬇️ הורד שיר</a>
+        <a href="#lyrics" class="btn">📜 מילים</a>
+      </div>
+    </div>
+
+    <!-- Right: Album Cover -->
+    <div class="album">
+      <img src="./שיר אלול (2).png" alt="Album Cover">
+      <img src="9c3e2c3d-5524-47e1-aef5-28bc0136ea93.png" class="behind" alt="Behind Cover">
+    </div>
+  </div>
+
+  <!-- Lyrics Section -->
+  <div class="lyrics" id="lyrics">
+    <h2>מילים לשיר</h2>
+    <p>
+      השיר במנגינה של <br>
+משה פלד: אחים<br>
+<br><br>
+בית 1<br>
+קוֹל דּוֹדִי דּוֹפֵק לוֹחֵשׁ פִּתְחִי לִי<br>
+קָרֵב לוֹ יוֹם כֹּה גָּדוֹל בִּשְׁבִילִי<br>
+עַיִן שֶׁדּוֹמַעַת לֵב נִשְׁבָּר<br>
+מַה יֵּלֶד יוֹם מָה מָחָר?<br>
+<br><br>
+וּבַחוּץ סוּפוֹת רַעַשׁ מִלְחָמָה<br>
+בּוֹעֶרֶת כֹּה עָמֹק הַלֶּהָבָה<br>
+יָבוֹא לוֹ יוֹם וְנָשׁוּב הַבַּיְתָה<br>
+יְרַגְּשׁוּ הֵן כָּל הַנִּצְחוֹנוֹת<br>
+<br><br>
+פזמון<br>
+מְבַקֶּשֶׁת בִּדְמָעוֹת אַבָּא<br><br>
+שֶׁאֶזְכֶּה בְּעֵינְךָ לַחֲזוֹת<br>
+וּבִתְפִלָּה (מֵעַכְשָׁו) לְהַבָּא<br>
+שֶׁאֶחְזֹר בִּי (ו)בִּשְׁבִילֵךְ לִהְיוֹת<br>
+<br><br>
+שְׁעָרִים יִפָּתְחוּ לִי בִּתְפִלָּה<br>
+זְעָקָה שֶׁנִּשְׁמַעַת מ/לְרָחוֹק<br>
+מְבַקֶּשֶׁת שֶׁתָּמִיד תִּשְׁמַע<br>
+וְהַכֹּל יַהֲפֹךְ עוֹד לְמָתוֹק<br>
+<br><br>
+בית 2<br>
+אֶל הַגַּן יָרַד הַמֶּלֶךְ בִּכְבוֹדוֹ<br>
+לְלַקֵּט כָּל תְּפֵלוֹתַי לְבַדּוֹ<br>
+אֲבַקֵּשׁ אוֹתְךָ וְרַק אֵלֶיךָ<br>
+בְּצֵאתִי לִקְרָאתְךָ מְצָאתִיךָ<br>
+<br><br>
+עוֹד רֶגַע קָט בְּרַעַד נַעֲמֹד<br>
+בְּיוֹם גָּדוֹל שֶׁכָּל כֻּלּוֹ הוֹד<br>
+בְּרַעַשׁ י/תִּשְׁמַע תְּקִיעָה גְּדוֹלָה<br>
+וּבְשׁוֹפָר תָּבוֹא הַגְּאֻלָּה!<br>
+<br><br>
+פזמון<br>
+מְבַקֶּשֶׁת בִּדְמָעוֹת אַבָּא<br>
+שֶׁאֶזְכֶּה בְּעֵינְךָ לַחֲזוֹת<br>
+וּבִתְפִלָּה (מֵעַכְשָׁו) לְהַבָּא<br>
+שֶׁאֶחְזֹר בִּי (ו)בִּשְׁבִילֵךְ לִהְיוֹת<br>
+<br><br>
+שְׁעָרִים יִפָּתְחוּ לִי בִּתְפִלָּה<br>
+זְעָקָה שֶׁנִּשְׁמַעַת מ/לְרָחוֹק<br>
+מְבַקֶּשֶׁת שֶׁתָּמִיד תִּשְׁמַע<br>
+וְהַכֹּל יַהֲפֹךְ עוֹד לְמָתוֹק<br>
+    </p>
+  </div>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const canvas = document.getElementById('visualizer');
+    const container = document.getElementById('visualizer-container');
+    const ctx = canvas.getContext('2d');
+
+    let audioCtx, analyser, source, dataArray;
+
+    function startVisualizer() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        source = audioCtx.createMediaElementSource(audio);
+        source.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        analyser.fftSize = 256;
+        let bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+      }
+      draw();
+    }
+
+    function draw() {
+      if (audio.paused || audio.ended) return; // עצירה כשהשיר כבוי
+      requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let barWidth = (canvas.width / dataArray.length) * 2;
+      let barHeight;
+      let x = 0;
+      for (let i = 0; i < dataArray.length; i++) {
+        barHeight = dataArray[i];
+        ctx.fillStyle = `hsl(${i * 3}, 100%, 50%)`;
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      }
+    }
+
+    // Resize canvas to fit container
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Show/hide visualizer based on play/pause
+    audio.addEventListener('play', () => {
+      container.style.display = 'block';
+      startVisualizer();
+    });
+
+    audio.addEventListener('pause', () => {
+      container.style.display = 'none';
+    });
+
+    audio.addEventListener('ended', () => {
+      container.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
